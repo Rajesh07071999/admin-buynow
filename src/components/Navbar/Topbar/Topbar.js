@@ -73,7 +73,7 @@ function Topbar({onToggleSidebar}) {
           >
             <span className="avatar avatar-sm mt-2">
               <img
-                src="../assests/avatars/face-1.jpg"
+                src="https://www.shutterstock.com/image-vector/avatar-gender-neutral-silhouette-vector-600nw-2470054311.jpg"
                 alt="..."
                 className="avatar-img rounded-circle"
               />
@@ -83,7 +83,7 @@ function Topbar({onToggleSidebar}) {
             className="dropdown-menu dropdown-menu-right"
             aria-labelledby="navbarDropdownMenuLink"
           >
-            <Link className="dropdown-item" to="#">
+            <Link className="dropdown-item" to="/profile/edit">
               Profile
             </Link>
             <Link className="dropdown-item" to="/">

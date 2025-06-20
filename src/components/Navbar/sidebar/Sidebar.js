@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FiHome, FiInfo } from "react-icons/fi";
+import { FiBox, FiHome, FiInfo, FiList, FiShoppingCart, FiUser } from "react-icons/fi";
+import { FaBoxOpen, FaList } from "react-icons/fa";
 const Sidebar = ({ collapse }) => {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
@@ -22,7 +23,7 @@ const Sidebar = ({ collapse }) => {
   const onMouseLeave = () => {
     if (collapsed) document.body.classList.remove("hover");
   };
-console.log(path);
+  console.log(path);
 
   useEffect(() => {
     setCollapsed(collapse);
@@ -49,36 +50,21 @@ console.log(path);
         </i>
       </Link>
       <nav className="vertnav navbar navbar-light">
-        {/* nav bar */}
         <div className="w-100 mb-4 d-flex">
           <Link
             className="navbar-brand mx-auto mt-2 flex-fill text-center"
-            href="/dashboard"
+            to="/dashboard"
+            style={{ fontSize: "2.5rem" }}
           >
-            <svg
-              version="1.1"
-              id="logo"
-              className="navbar-brand-img brand-sm"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-              x="0px"
-              y="0px"
-              viewBox="0 0 120 120"
-              xmlSpace="preserve"
-            >
-              <g>
-                <polygon className="st0" points="78,105 15,105 24,87 87,87 	" />
-                <polygon className="st0" points="96,69 33,69 42,51 105,51 	" />
-                <polygon className="st0" points="78,33 15,33 24,15 87,15 	" />
-              </g>
-            </svg>
+            🛍️
           </Link>
         </div>
+
+
         <ul className="navbar-nav flex-fill w-100 mb-2">
           <li
-            className={`${
-              path === "/dashboard" ? "nav-item menuitem-active" : "nav-item"
-            }`}
+            className={`${path === "/dashboard" ? "nav-item menuitem-active" : "nav-item"
+              }`}
           >
             <Link
               to="/dashboard"
@@ -94,13 +80,49 @@ console.log(path);
 
           <li className="nav-item">
             <Link
-              to="/about-us"
+              to="/users"
               data-toggle="collapse"
               aria-expanded="false"
               className=" nav-link"
             >
-              <FiInfo size={20} />
-              <span className="ml-3 item-text">About Us</span>
+              <FiUser size={20} />
+              <span className="ml-3 item-text">Users</span>
+              <span className="sr-only">(current)</span>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              to="/products"
+              data-toggle="collapse"
+              aria-expanded="false"
+              className=" nav-link"
+            >
+              <FaBoxOpen size={20} />
+              <span className="ml-3 item-text">Products</span>
+              <span className="sr-only">(current)</span>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              to="/orders"
+              data-toggle="collapse"
+              aria-expanded="false"
+              className=" nav-link"
+            >
+              <FaList size={20} />
+              <span className="ml-3 item-text">Orders</span>
+              <span className="sr-only">(current)</span>
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link
+              to="/carts"
+              data-toggle="collapse"
+              aria-expanded="false"
+              className=" nav-link"
+            >
+              <FiShoppingCart size={20} />
+              <span className="ml-3 item-text">Carts</span>
               <span className="sr-only">(current)</span>
             </Link>
           </li>

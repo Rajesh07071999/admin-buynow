@@ -1,68 +1,85 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 function Login() {
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log("Login Data:", data);
+    navigate("/dashboard");
+    // You can handle API call or auth logic here
+  };
+
   return (
     <div className="wrapper vh-100">
       <div className="row align-items-center h-100">
-        <form className="col-lg-3 col-md-4 col-10 mx-auto text-center">
-          <a
+        <form
+          className="col-lg-3 col-md-4 col-10 mx-auto text-center"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <Link
             className="navbar-brand mx-auto mt-2 flex-fill text-center"
-            href="./index.html"
+            to="/login"
+            style={{ fontSize: "5rem" }}
           >
-            <svg
-              version="1.1"
-              id="logo"
-              className="navbar-brand-img brand-md"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-              x="0px"
-              y="0px"
-              viewBox="0 0 120 120"
-              xmlSpace="preserve"
-            >
-              <g>
-                <polygon className="st0" points="78,105 15,105 24,87 87,87 	" />
-                <polygon className="st0" points="96,69 33,69 42,51 105,51 	" />
-                <polygon className="st0" points="78,33 15,33 24,15 87,15 	" />
-              </g>
-            </svg>
-          </a>
+            🛍️
+          </Link>
           <h1 className="h6 mb-3">Sign in</h1>
-          <div className="form-group">
-            <label htmlFor="inputEmail" className="sr-only">
-              Email address
-            </label>
+
+          <div className="form-group mb-3">
             <input
               type="email"
-              id="inputEmail"
-              className="form-control form-control-lg"
+              className={`form-control form-control-lg ${errors.email ? "is-invalid" : ""
+                }`}
               placeholder="Email address"
-              required=""
-              autofocus=""
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^\S+@\S+$/i,
+                  message: "Invalid email address",
+                },
+              })}
             />
+            {errors.email && (
+              <div className="invalid-feedback">{errors.email.message}</div>
+            )}
           </div>
-          <div className="form-group">
-            <label htmlFor="inputPassword" className="sr-only">
-              Password
-            </label>
+
+          <div className="form-group mb-3">
             <input
               type="password"
-              id="inputPassword"
-              className="form-control form-control-lg"
+              className={`form-control form-control-lg ${errors.password ? "is-invalid" : ""
+                }`}
               placeholder="Password"
-              required=""
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters",
+                },
+              })}
             />
+            {errors.password && (
+              <div className="invalid-feedback">{errors.password.message}</div>
+            )}
           </div>
+
           <div className="checkbox mb-3">
             <label>
-              <input type="checkbox" defaultValue="remember-me" /> Stay logged
-              in{" "}
+              <input type="checkbox" defaultValue="remember-me" /> Stay logged in{" "}
             </label>
           </div>
-          <button className="btn btn-lg btn-primary btn-block" type="submit">
+
+          <button className="btn btn-lg btn-primary btn-block w-100" type="submit">
             Login
           </button>
-          <p className="mt-5 mb-3 text-muted">© 2020</p>
+          <p className="mt-5 mb-3 text-muted">© 2025</p>
         </form>
       </div>
     </div>
