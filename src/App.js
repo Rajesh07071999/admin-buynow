@@ -30,7 +30,7 @@ const OrderDetails = Loadable(lazy(() => import('./pages/orders/orderDetails.js'
 function App() {
   return (
     <>
-      <BrowserRouter basename='/admin'>
+      <BrowserRouter>
         <Routes>
           <Route
             path="/"
@@ -43,17 +43,17 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route element={<DashboardLayout />}>
               <Route path='*' element={<NotFound />} />
-              <Route path='not-found' element={<NotFound />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="orders" element={<OrderLists />} />
-              <Route path="addProducts" element={<AddProduct />} />
-              <Route path="products" element={<ProductLists />} />
-              <Route path="users" element={<UserLists />} />
-              <Route path="carts" element={<Cart />} />
-              <Route path="profile/edit" element={<EditProfile />} />
-              <Route path="userDetails/:id" element={<UserDetails />} />
-              <Route path="orderDetails/:id" element={<OrderDetails />} />
-              <Route path="editProduct/:id" element={<EditProduct />} />
+              <Route path='/not-found' element={<NotFound />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/orders" element={<OrderLists />} />
+              <Route path="/addProducts" element={<AddProduct />} />
+              <Route path="/products" element={<ProductLists />} />
+              <Route path="/users" element={<UserLists />} />
+              <Route path="/carts" element={<Cart />} />
+              <Route path="/profile/edit" element={<EditProfile />} />
+              <Route path="/userDetails/:id" element={<UserDetails />} />
+              <Route path="/orderDetails/:id" element={<OrderDetails />} />
+              <Route path="/editProduct/:id" element={<EditProduct />} />
             </Route>
           </Route>
         </Routes>
