@@ -15,7 +15,7 @@ const NotFound = () => {
                 <h3 className="h2">Look like you're lost</h3>
                 <h6>the page you are looking for not avaible!</h6>
               </div>
-              <Link className='btn btn-custom mt-2' to={''} >Go To Dashboard</Link>
+              <Link className='btn btn-custom mt-2' to={'/dashboard'} >Go To Dashboard</Link>
             </div>
           </div>
         </div>

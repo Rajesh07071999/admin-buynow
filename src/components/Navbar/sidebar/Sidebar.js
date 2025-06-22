@@ -23,7 +23,6 @@ const Sidebar = ({ collapse }) => {
   const onMouseLeave = () => {
     if (collapsed) document.body.classList.remove("hover");
   };
-  console.log(path);
 
   useEffect(() => {
     setCollapsed(collapse);

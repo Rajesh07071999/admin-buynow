@@ -1,43 +1,49 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { login } from "../../../store/slices/adminSlice";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Login Data:", data);
-    navigate("/dashboard");
-    // You can handle API call or auth logic here
+  const onSubmit = async (data) => {
+    try {
+      const res = await dispatch(login({ data }));
+      if (res?.payload?.code == 200) {
+        localStorage.setItem("adminToken", res.payload.data.token);
+        navigate("/dashboard");
+      } else {
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error("Something went wrong!");
+    }
   };
 
   return (
-    <div className="wrapper vh-100">
-      <div className="row align-items-center h-100">
-        <form
-          className="col-lg-3 col-md-4 col-10 mx-auto text-center"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <Link
-            className="navbar-brand mx-auto mt-2 flex-fill text-center"
-            to="/login"
-            style={{ fontSize: "5rem" }}
-          >
+    <div className="min-vh-100 d-flex justify-content-center align-items-center bg-light">
+      <div className="card p-4 shadow-lg" style={{ width: "100%", maxWidth: "400px" }}>
+        <div className="text-center mb-4">
+          <Link to="/" className="text-decoration-none fs-1">
             🛍️
           </Link>
-          <h1 className="h6 mb-3">Sign in</h1>
-
+          <h4 className="mt-2 fw-bold text-dark">BuyNow Admin Login</h4>
+        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-group mb-3">
+            <label className="fw-semibold text-muted">Email</label>
             <input
               type="email"
-              className={`form-control form-control-lg ${errors.email ? "is-invalid" : ""
-                }`}
-              placeholder="Email address"
+              className={`form-control ${errors.email ? "is-invalid" : ""}`}
+              placeholder="Enter email"
               {...register("email", {
                 required: "Email is required",
                 pattern: {
@@ -52,11 +58,11 @@ function Login() {
           </div>
 
           <div className="form-group mb-3">
+            <label className="fw-semibold text-muted">Password</label>
             <input
               type="password"
-              className={`form-control form-control-lg ${errors.password ? "is-invalid" : ""
-                }`}
-              placeholder="Password"
+              className={`form-control ${errors.password ? "is-invalid" : ""}`}
+              placeholder="Enter password"
               {...register("password", {
                 required: "Password is required",
                 minLength: {
@@ -70,17 +76,17 @@ function Login() {
             )}
           </div>
 
-          <div className="checkbox mb-3">
-            <label>
-              <input type="checkbox" defaultValue="remember-me" /> Stay logged in{" "}
-            </label>
-          </div>
-
-          <button className="btn btn-lg btn-primary btn-block w-100" type="submit">
+          <button
+            type="submit"
+            className="btn btn-primary w-100 fw-semibold"
+          >
             Login
           </button>
-          <p className="mt-5 mb-3 text-muted">© 2025</p>
         </form>
+
+        <div className="text-center mt-3">
+          <small className="text-muted">© 2025 BuyNow</small>
+        </div>
       </div>
     </div>
   );
