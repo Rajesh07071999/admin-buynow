@@ -1,6 +1,6 @@
 {
   "name": "demo",
-  "homepage": "http://localhost:3000/admin",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
